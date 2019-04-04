@@ -1,0 +1,17 @@
+.chat-window {
+  position: relative;
+  height: 100%;
+  color: #263238;
+  font-size: 13px;
+
+  .messages-container {
+    max-height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+
+    .messages {
+      padding: 10px 5% 68px 5%;
+    }
+  }
+}
