@@ -24,7 +24,7 @@ class UserInput extends Component {
           <input type="text" className="input-text"
           value={this.state.value} onChange={e => this.updateValue(e)}/>
           <button type="submit" className="submit-button" disabled={!this.state.value.trim()}>
-            <img src="submit_icon.png" alt="" height="30" />
+            <img src="submit_icon.png" alt="submit" height="30" />
           </button>
         </form>
       </div>

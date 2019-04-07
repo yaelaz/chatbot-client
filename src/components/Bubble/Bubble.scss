@@ -2,24 +2,22 @@
   margin-top: 1px;
   display: flex;
   justify-content: flex-start;
-  animation-name: 'expand';
-  animation-duration: 0.25s;
 
   &.incoming {
     flex-direction: row;
 
     &.first {
-      .avatar{
+      .avatar-container{
         background-image: url('/mayas_avatar.png');
         background-size: cover;
       }
 
-      .text {
+      .text-container {
         border-radius: 16px 16px 16px 2px;
       }
     }
 
-    .text {
+    .text-container {
       background: #fff;
       border-radius: 2px 16px 16px 16px;
     }
@@ -29,17 +27,17 @@
     flex-direction: row-reverse;
 
     &.first {
-      .avatar {
+      .avatar-container {
         background-image: url('/user_avatar.png');
         background-size: cover;
       }
 
-      .text {
+      .text-container {
         border-radius: 16px 16px 2px 16px;
       }
     }
 
-    .text {
+    .text-container {
       background: #cfd8dc;
       border-radius: 16px 2px 16px 16px;
     }
@@ -48,23 +46,24 @@
   &.first {
     margin-top: 12px;
 
-    .avatar {
+    .avatar-container {
       border-radius: 50%;
     }
   }
 
-  .avatar {
+  .avatar-container {
     flex-grow: 0;
     flex-shrink: 0;
     width: 38px;
     height: 38px;
   }
 
-  .text {
-    flex-grow: 1;
+  .text-container {
     padding: 10px;
     border-radius: 16px;
     margin: 0 10px;
+    animation-name: 'expand';
+    animation-duration: 0.25s;
   }
 }
 

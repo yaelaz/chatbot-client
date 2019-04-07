@@ -1,73 +1,66 @@
 import React, { Component } from 'react'
+import * as chatbotService from '../../services/chatbot-service'
+
 import Bubble from '../Bubble'
 import UserInput from '../UserInput'
-import './ChatWindow.scss'
-import * as service from '../../service/service'
+import AutoScrollContainer from '../AutoScrollContainer'
 
+import './ChatWindow.scss'
+
+//todo: get rid of the 68px padding in the scss
 class ChatWindow extends Component {
   constructor(props) {
     super(props);
-    this.msgs = React.createRef();
-    this.state = { messages: [], loading: false };
+    this.state = { messages: [], typing: false };
   }
 
   componentDidMount() {
-    this.fetchWelcome();
-  }
-
-  componentDidUpdate(){
-    window.scrollTo(0,this.msgs.current.scrollHeight);
-  }
-
-  fetchWelcome() {
-    service.getWelcomeMessage()
-      .then(res => {
-        if (res.error) {
-          console.log(res.error);
-        } else {
-          this.setState( (state, props) => ({
-            messages: state.messages.concat(res.map(r => ({...r, type: 'incoming'})))
-          }));
-        }
-      });
-  }
-
-  fetchAnswer(text) {
-    this.setState({ loading: true });
-    service.getAnswer(text)
-      .then(res => {
-        if (res.error) {
-          console.log(res.error);
-        } else {
-          this.setState( (state, props) => ({
-            loading: false,
-            messages: state.messages.concat(res.map(r => ({...r, type: 'incoming'})))
-          }));
-        }
-      });
+    chatbotService.establishConnection(this.handleMessageFromBot.bind(this));
   }
 
   addMessage(text) {
     this.setState( (state, props) => ({
       messages: state.messages.concat([{text, type: 'outgoing'}])
     }));
-    this.fetchAnswer(text);
+
+    chatbotService.emitMessageFromUser(text);
+  }
+
+  handleMessageFromBot(data) {
+    if (data.typing) {
+      this.setState({ typing: true });
+    } else {
+      this.setState( (state, props) => ({
+        typing: false,
+        messages: state.messages.concat([{...data, type: 'incoming'}])
+      }));
+    }
+  }
+
+  renderedMessages() {
+    return this.state.messages.map((message, index, messages) => {
+      let position = 'middle';
+      if (index === 0 || message.type !== messages[index-1].type) {
+        position = 'first';
+      } else if (index === messages.length-1 || message.type !== messages[index+1].type) {
+        position = 'last';
+      }
+      return <Bubble key={index} text={message.text} type={message.type}
+              position={position} />
+    });
   }
 
   render() {
     return (
       <div className="chat-window">
-        <div className="messages-container" ref={this.msgs}>
+        <AutoScrollContainer>
           <div className="messages">
-            {this.state.messages.map((message, i) => {
-              const first = i === 0 || this.state.messages[i-1].type !== message.type;
-              return <Bubble key={i} text={message.text} type={message.type}
-                      first={first} typing={message.typing} />
-            })}
-            {this.state.loading && <Bubble key={-1} type="incoming"
-                    first={true} typing={true} />}
+            {this.renderedMessages()}
+            {this.state.typing && <Bubble key={-1} type="incoming" isTyping={true}
+            position={(this.state.messages.length === 0 ||
+              this.state.messages[this.state.messages.length-1] != 'incoming') ? 'first' : ''} />}
           </div>
-        </div>
+        </AutoScrollContainer>
         <UserInput addMessage={this.addMessage.bind(this)} />
       </div>
     );

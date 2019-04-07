@@ -1,9 +1,10 @@
 import React from 'react'
-import './TypingDots.scss'
+import './TypingIndicator.scss'
 
-export default function TypingDots(props) {
+//todo: consider changing to styled components
+export default function TypingIndicator(props) {
   return (
-    <div className="typing-dots">
+    <div className="typing-indicator">
       <div className="wave">
         <span className="dot"></span>
         <span className="dot"></span>
