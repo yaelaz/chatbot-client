@@ -7,7 +7,6 @@ import AutoScrollContainer from '../AutoScrollContainer'
 
 import './ChatWindow.scss'
 
-//todo: get rid of the 68px padding in the scss
 class ChatWindow extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +36,7 @@ class ChatWindow extends Component {
     }
   }
 
-  renderedMessages() {
+  renderBubbles() {
     return this.state.messages.map((message, index, messages) => {
       let position = 'middle';
       if (index === 0 || message.type !== messages[index-1].type) {
@@ -50,18 +49,28 @@ class ChatWindow extends Component {
     });
   }
 
+  renderTypingBubble() {
+    const messages = this.state.messages;
+
+    const isFirstPosition = messages.length === 0 || messages[messages.length-1].type !== 'incoming';
+
+    return this.state.typing && <Bubble type="incoming" isTyping={true}
+    position={( isFirstPosition ? 'first' : 'last')}
+    />;
+  }
+
   render() {
     return (
       <div className="chat-window">
         <AutoScrollContainer>
           <div className="messages">
-            {this.renderedMessages()}
-            {this.state.typing && <Bubble key={-1} type="incoming" isTyping={true}
-            position={(this.state.messages.length === 0 ||
-              this.state.messages[this.state.messages.length-1] != 'incoming') ? 'first' : ''} />}
+            {this.renderBubbles()}
+            {this.renderTypingBubble()}
           </div>
         </AutoScrollContainer>
-        <UserInput addMessage={this.addMessage.bind(this)} />
+        <div className="footer">
+          <UserInput addMessage={this.addMessage.bind(this)} />
+        </div>
       </div>
     );
   }

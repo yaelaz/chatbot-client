@@ -1,10 +1,17 @@
 .chat-window {
-  position: relative;
   height: 100%;
+  position: relative;
   color: #263238;
   font-size: 13px;
 
   .messages {
     padding: 10px 5% 68px 5%;
+  }
+
+  .footer {
+    position: fixed;
+    width: 100%;
+    height: 58px;
+    bottom: 0;
   }
 }

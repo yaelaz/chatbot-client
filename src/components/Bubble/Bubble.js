@@ -1,16 +1,16 @@
 import React from 'react'
-import './Bubble.scss'
+import PropTypes from 'prop-types'
+
 import TypingIndicator from '../TypingIndicator'
 
-//todo: handle last bubble
-//todo: add propTypes
-//todo: render avatar only on first, get rid of avatar css styling for first
-//todo: bound messages to not overflow to the avatar's column
+import './Bubble.scss'
 
 export default function Bubble(props) {
   return (
     <div className={`bubble-container ${props.type} ${props.position}`}>
-      <div className="avatar-container"></div>
+      <div className="avatar-container">
+        {props.position === 'first' && <div className="avatar"></div>}
+      </div>
       <div className="text-container">
         {props.isTyping ?
           <TypingIndicator />
@@ -21,3 +21,10 @@ export default function Bubble(props) {
     </div>
   );
 }
+
+Bubble.propTypes = {
+  type: PropTypes.oneOf(['incoming', 'outgoing']).isRequired,
+  position: PropTypes.oneOf(['first', 'middle', 'last']).isRequired,
+  isTyping: PropTypes.bool,
+  text: PropTypes.string
+};

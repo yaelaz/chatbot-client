@@ -4,6 +4,7 @@ import './UserInput.scss'
 class UserInput extends Component {
   constructor(props) {
     super(props);
+    this.textInput = React.createRef();
     this.state = { value: '' };
   }
 
@@ -17,11 +18,15 @@ class UserInput extends Component {
     this.setState({ value: '' });
   }
 
+  componentDidMount() {
+    this.textInput.current.focus();
+  }
+
   render() {
     return (
       <div className="user-input">
         <form onSubmit={e => this.handleClick(e)}>
-          <input type="text" className="input-text"
+          <input type="text" className="input-text" ref={this.textInput}
           value={this.state.value} onChange={e => this.updateValue(e)}/>
           <button type="submit" className="submit-button" disabled={!this.state.value.trim()}>
             <img src="submit_icon.png" alt="submit" height="30" />

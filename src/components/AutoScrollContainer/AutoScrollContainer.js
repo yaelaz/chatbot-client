@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
 import './AutoScrollContainer.scss'
 
 class AutoScrollContainer extends Component {
@@ -19,5 +21,9 @@ class AutoScrollContainer extends Component {
     );
   }
 }
+
+AutoScrollContainer.propTypes = {
+  children: PropTypes.element.isRequired
+};
 
 export default AutoScrollContainer;
