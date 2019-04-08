@@ -1,30 +1,26 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-import TypingIndicator from '../TypingIndicator'
+import TypingIndicator from "../TypingIndicator";
 
-import './Bubble.scss'
+import "./Bubble.scss";
 
 export default function Bubble(props) {
   return (
     <div className={`bubble-container ${props.type} ${props.position}`}>
       <div className="avatar-container">
-        {props.position === 'first' && <div className="avatar"></div>}
+        {props.position === "first" && <div className="avatar" />}
       </div>
       <div className="text-container">
-        {props.isTyping ?
-          <TypingIndicator />
-          :
-          props.text
-        }
+        {props.isTyping ? <TypingIndicator /> : props.text}
       </div>
     </div>
   );
 }
 
 Bubble.propTypes = {
-  type: PropTypes.oneOf(['incoming', 'outgoing']).isRequired,
-  position: PropTypes.oneOf(['first', 'middle', 'last']).isRequired,
+  type: PropTypes.oneOf(["incoming", "outgoing"]).isRequired,
+  position: PropTypes.oneOf(["first", "middle", "last"]).isRequired,
   isTyping: PropTypes.bool,
   text: PropTypes.string
 };

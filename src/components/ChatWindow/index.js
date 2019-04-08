@@ -1,2 +1,2 @@
-import ChatWindow from './ChatWindow'
+import ChatWindow from "./ChatWindow";
 export default ChatWindow;

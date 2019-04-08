@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import './AutoScrollContainer.scss'
+import "./AutoScrollContainer.scss";
 
 class AutoScrollContainer extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class AutoScrollContainer extends Component {
     this.container = React.createRef();
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     window.scrollTo(0, this.container.current.scrollHeight);
   }
 

@@ -1,2 +1,2 @@
-import TypingIndicator from './TypingIndicator'
+import TypingIndicator from "./TypingIndicator";
 export default TypingIndicator;

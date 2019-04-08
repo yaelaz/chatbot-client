@@ -1,2 +1,2 @@
-import AutoScrollContainer from './AutoScrollContainer'
+import AutoScrollContainer from "./AutoScrollContainer";
 export default AutoScrollContainer;

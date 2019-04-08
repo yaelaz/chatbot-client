@@ -18,14 +18,14 @@
       }
     }
 
-    .text-container {
-      background: #eceff1;
-      border-radius: 2px 16px 16px 16px;
-    }
-
     .avatar{
       background-image: url('/mayas_avatar.png');
       background-size: cover;
+    }
+
+    .text-container {
+      background: #eceff1;
+      border-radius: 2px 16px 16px 16px;
     }
   }
 
@@ -44,15 +44,15 @@
       }
     }
 
-    .text-container {
-      background: #263238;
-      color: #fff;
-      border-radius: 16px 2px 16px 16px;
-    }
-
     .avatar {
       background-image: url('/user_avatar.png');
       background-size: cover;
+    }
+    
+    .text-container {
+      background: #4A4A4A;
+      color: #fff;
+      border-radius: 16px 2px 16px 16px;
     }
   }
 

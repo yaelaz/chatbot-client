@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
-import './UserInput.scss'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
+import "./UserInput.scss";
 
 class UserInput extends Component {
   constructor(props) {
     super(props);
     this.textInput = React.createRef();
-    this.state = { value: '' };
+    this.state = { value: "" };
   }
 
   updateValue(e) {
@@ -15,7 +17,7 @@ class UserInput extends Component {
   handleClick(e) {
     e.preventDefault();
     this.props.addMessage(this.state.value);
-    this.setState({ value: '' });
+    this.setState({ value: "" });
   }
 
   componentDidMount() {
@@ -26,9 +28,18 @@ class UserInput extends Component {
     return (
       <div className="user-input">
         <form onSubmit={e => this.handleClick(e)}>
-          <input type="text" className="input-text" ref={this.textInput}
-          value={this.state.value} onChange={e => this.updateValue(e)}/>
-          <button type="submit" className="submit-button" disabled={!this.state.value.trim()}>
+          <input
+            type="text"
+            className="input-text form-control"
+            ref={this.textInput}
+            value={this.state.value}
+            onChange={e => this.updateValue(e)}
+          />
+          <button
+            type="submit"
+            className="submit-button"
+            disabled={!this.state.value.trim()}
+          >
             <img src="submit_icon.png" alt="submit" height="30" />
           </button>
         </form>
@@ -36,5 +47,9 @@ class UserInput extends Component {
     );
   }
 }
+
+UserInput.propTypes = {
+  addMessage: PropTypes.func.isRequired
+};
 
 export default UserInput;

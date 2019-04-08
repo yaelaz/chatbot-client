@@ -1,2 +1,2 @@
-import UserInput from './UserInput'
+import UserInput from "./UserInput";
 export default UserInput;
